@@ -1,0 +1,46 @@
+
+    
+body{
+
+    background: rgb(177,136,46);
+    background: linear-gradient(90deg, rgba(177,136,46,1) 0%, rgba(246,163,97,1) 38%, rgba(235,198,150,1) 79%, rgba(245,209,154,1) 100%);
+}
+.izquierda{
+    text-align: left;
+}
+.izquierda{
+    color: rgb(184, 245, 225);
+}
+.derecha{
+    text-align: right;
+}
+body{
+    font-family: Arial;
+    font-size: 25 px;
+}
+.color{
+    color: rgb(181, 199, 193);
+}
+.brilo{
+   color: brightness(0.4);
+}
+.iluminado{
+    text-shadow: 0 0 5px #00ffff;
+}
+.centro{
+    text-align: center;
+}
+
+.col :hover{
+color: #f1f3f3;
+}
+
+.gif :hover{
+    background-color: rgb(27, 221, 189);
+}
+.coll :hover{
+    color: #00ffff;
+}
+.ancho{
+    text-anchor: end;
+}
