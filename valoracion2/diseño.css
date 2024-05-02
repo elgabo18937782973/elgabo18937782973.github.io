@@ -1,0 +1,13 @@
+.fondo{
+   background-color: aqua;
+}
+.centro{
+    text-align: center;
+}
+body{
+    background-color: bisque;
+}
+.brillo{
+   color: rgb(3, 15, 83);
+   text-shadow: 0 0 15px #fff;
+}
