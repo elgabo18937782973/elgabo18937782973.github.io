@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjective Collision Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://wallpaperaccess.com/full/187161.jpg');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        canvas {
+            background-color: rgba(0, 0, 0, 0.7);
+            display: block;
+            margin: 0 auto;
+            border: 3px solid white;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 600px;
+        }
+
+        table, th, td {
+            border: 1px solid white;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        th {
+            background-color: #333;
+        }
+
+        #gameOverMessage, #sentenceForm, #level2Message, #resultMessage {
+            display: none;
+        }
+
+        #level2Message {
+            font-size: 24px;
+            color: yellow;
+        }
+
+        #sentenceInput {
+            width: 50%;
+            padding: 10px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        #submitSentence {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        #sentencesTable {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 600px;
+        }
+
+        #sentencesTable td {
+            padding: 10px;
+            border: 1px solid white;
+            font-size: 18px;
+        }
+
+        #gameOver {
+            font-size: 30px;
+            color: red;
+        }
+
+        #comparativeSuperlativeMessage {
+            font-size: 20px;
+            color: yellow;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body onclick="PlayAudio()">
+    <h1>Adjective Collision Game</h1>
+    <canvas id="gameCanvas" width="600" height="400"></canvas>
+
+    <h2>Destroyed Adjectives</h2>
+    <table id="wordTable">
+        <tr>
+            <th>Word 1</th>
+            <th>Word 2</th>
+            <th>Word 3</th>
+        </tr>
+    </table>
+
+    <h2 id="gameOverMessage">Level 1 Complete! Proceed to the next level.</h2>
+    <h2 id="level2Message">Level 2: Form Sentences using the adjectives you collected!</h2>
+
+    <div id="sentenceForm">
+        <input type="text" id="sentenceInput" placeholder="Create a sentence using collected adjectives">
+        <button id="submitSentence">Submit Sentence</button>
+    </div>
+
+    <h2>Created Sentences</h2>
+    <table id="sentencesTable"></table>
+
+    <div id="resultMessage"></div>
+    <div id="gameOver"></div>
+    <div id="comparativeSuperlativeMessage"></div>
+
+    <audio id="musica3" loop>
+        <source src="audio/musica3.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+    
+    <script>
+        function PlayAudio() {
+            document.getElementById("musica3").play();
+        }
+        
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let ship, bullets, correctAdjectives, incorrectWords, allWords, fallingWords, destroyedWords;
+        let gameOver, level2Active;
+
+        function resetGame() {
+            ship = {
+                x: canvas.width / 2 - 25,
+                y: canvas.height - 50,
+                width: 50,
+                height: 30,
+                speed: 5,
+                movingLeft: false,
+                movingRight: false
+            };
+
+            bullets = [];
+            correctAdjectives = ["happy", "blue", "fast", "bright", "beautiful", "tall", "old", "young", "clean"];
+            incorrectWords = ["run", "cat", "house", "jump", "car", "tree", "sun"];
+            allWords = [];
+            fallingWords = [];
+            destroyedWords = [];
+            gameOver = false;
+            level2Active = false;
+
+            allWords = [...correctAdjectives, ...incorrectWords];
+            shuffle(allWords);
+
+            document.getElementById("gameOver").style.display = "none";
+            document.getElementById("gameCanvas").style.display = "block";
+            document.getElementById("sentenceForm").style.display = "none";
+            document.getElementById("resultMessage").textContent = "";
+            document.getElementById("sentencesTable").innerHTML = "";
+            document.getElementById("comparativeSuperlativeMessage").textContent = "";
+
+            gameLoop();
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function createWord() {
+            if (allWords.length > 0) {
+                let word = allWords.pop();
+                let isCorrect = correctAdjectives.includes(word);
+                let x = Math.random() * (canvas.width - 50);
+                fallingWords.push({ word, x, y: 0, speed: 2, isCorrect });
+            } else if (fallingWords.length === 0 && !level2Active) {
+                endLevel1();
+            }
+        }
+
+        setInterval(createWord, 2000);
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === "ArrowLeft") ship.movingLeft = true;
+            if (e.code === "ArrowRight") ship.movingRight = true;
+            if (e.code === "Space" && !level2Active) {
+                bullets.push({ x: ship.x + ship.width / 2 - 2.5, y: ship.y, width: 5, height: 10 });
+                e.preventDefault();
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.code === "ArrowLeft") ship.movingLeft = false;
+            if (e.code === "ArrowRight") ship.movingRight = false;
+        });
+
+        function update() {
+            if (gameOver || level2Active) return;
+
+            if (ship.movingLeft && ship.x > 0) ship.x -= ship.speed;
+            if (ship.movingRight && ship.x < canvas.width - ship.width) ship.x += ship.speed;
+
+            bullets.forEach((bullet, index) => {
+                bullet.y -= 5;
+                if (bullet.y < 0) bullets.splice(index, 1);
+            });
+
+            fallingWords.forEach((fw, index) => {
+                fw.y += fw.speed;
+                if (fw.y > canvas.height) fallingWords.splice(index, 1);
+            });
+
+            bullets.forEach((bullet, bulletIndex) => {
+                fallingWords.forEach((fw, wordIndex) => {
+                    if (
+                        bullet.x < fw.x + 50 &&
+                        bullet.x + bullet.width > fw.x &&
+                        bullet.y < fw.y + 20 &&
+                        bullet.height + bullet.y > fw.y
+                    ) {
+                        if (!fw.isCorrect) {
+                            endGame("Game Over! You destroyed an incorrect word.");
+                        } else {
+                            destroyedWords.push(fw.word);
+                            updateWordTable(fw.word);
+                        }
+                        fallingWords.splice(wordIndex, 1);
+                        bullets.splice(bulletIndex, 1);
+                    }
+                });
+            });
+        }
+
+        function updateWordTable(word) {
+            const table = document.getElementById("wordTable");
+            let lastRow = table.rows[table.rows.length - 1];
+            let emptyCell = null;
+
+            for (let i = 0; i < lastRow.cells.length; i++) {
+                if (lastRow.cells[i].textContent === "") {
+                    emptyCell = lastRow.cells[i];
+                    break;
+                }
+            }
+
+            if (!emptyCell) {
+                lastRow = table.insertRow(-1);
+                for (let i = 0; i < 3; i++) {
+                    let cell = lastRow.insertCell(i);
+                    cell.textContent = "";
+                }
+                emptyCell = lastRow.cells[0];
+            }
+
+            emptyCell.textContent = word;
+            emptyCell.style.color = getRandomColor();
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function endLevel1() {
+            level2Active = true;
+            document.getElementById("gameOverMessage").style.display = "block";
+            document.getElementById("sentenceForm").style.display = "block";
+            document.getElementById("gameCanvas").style.display = "none";
+            document.getElementById("level2Message").style.display = "block";
+        }
+
+        function endGame(message) {
+            gameOver = true;
+            document.getElementById("gameOver").textContent = message;
+            document.getElementById("gameCanvas").style.display = "none";
+            document.getElementById("sentenceForm").style.display = "none";
+            document.getElementById("gameOverMessage").style.display = "none";
+            document.getElementById("resultMessage").style.display = "none";
+        }
+
+        function addSentenceToTable(sentence) {
+            const table = document.getElementById("sentencesTable");
+            const row = table.insertRow();
+            const cell = row.insertCell(0);
+            cell.textContent = sentence;
+        }
+
+        const comparativesSuperlatives = [
+            { comparative: "happier", superlative: "happiest" },
+            { comparative: "bluer", superlative: "bluest" },
+            { comparative: "faster", superlative: "fastest" },
+            { comparative: "brighter", superlative: "brightest" },
+            { comparative: "more beautiful", superlative: "most beautiful" },
+            { comparative: "taller", superlative: "tallest" },
+            { comparative: "older", superlative: "oldest" },
+            { comparative: "younger", superlative: "youngest" },
+            { comparative: "cleaner", superlative: "cleanest" }
+        ];
+
+        function isValidSentence(sentence) {
+            const foundWords = destroyedWords.filter(word => sentence.includes(word));
+            return foundWords.length > 0;
+        }
+
+        function checkComparativeOrSuperlative(word) {
+            const found = comparativesSuperlatives.find(item => 
+                item.comparative === word || item.superlative === word
+            );
+            if (found) {
+                return found.comparative === word ? "comparative" : "superlative";
+            }
+            return null;
+        }
+
+        function submitSentence() {
+    const sentenceInput = document.getElementById("sentenceInput").value;
+    let message = "";
+
+    // Limpiar mensajes previos
+    document.getElementById("resultMessage").textContent = "";
+    document.getElementById("comparativeSuperlativeMessage").textContent = "";
+
+    if (isValidSentence(sentenceInput)) {
+        addSentenceToTable(sentenceInput);
+        document.getElementById("resultMessage").textContent = "¡Frase añadida con éxito!";
+
+        // Comprobar si hay comparativos o superlativos en la frase
+        const wordsInSentence = sentenceInput.split(/\s+/);
+
+        wordsInSentence.forEach(word => {
+            const type = checkComparativeOrSuperlative(word);
+            if (type) {
+                // Asegurarse de diferenciar entre comparativo y superlativo
+                if (type === "comparative") {
+                    message += `the word "${word}" it's a comparativ3. `;
+                } else if (type === "superlative") {
+                    message += `the word "${word}" it's a superlative. `;
+                }
+            }
+        });
+
+        if (message) {
+            document.getElementById("comparativeSuperlativeMessage").textContent = message; // Actualizar mensaje
+        } else {
+            document.getElementById("comparativeSuperlativeMessage").textContent = "No comparative or superlative found! Make sure you use correct form.";
+        }
+    } else {
+        document.getElementById("resultMessage").textContent = "Invalid phrase! You must include at least one correct adjective.";
+    }
+}
+
+
+
+        document.getElementById("submitSentence").addEventListener("click", submitSentence);
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function draw() {
+            // Draw ship
+            ctx.fillStyle = "white";
+            ctx.fillRect(ship.x, ship.y, ship.width, ship.height);
+
+            // Draw bullets
+            bullets.forEach(bullet => {
+                ctx.fillStyle = "yellow";
+                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+            });
+
+            // Draw falling words
+            fallingWords.forEach(fw => {
+                ctx.fillStyle = fw.isCorrect ? "green" : "red";
+                ctx.font = "20px Arial";
+                ctx.fillText(fw.word, fw.x, fw.y);
+            });
+        }
+
+        resetGame();
+    </script>
+</body>
+</html>
