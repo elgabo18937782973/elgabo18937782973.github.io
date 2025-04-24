@@ -1,395 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adjective Collision Game</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('https://wallpaperaccess.com/full/187161.jpg');
-            background-size: cover;
-            color: white;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        canvas {
-            background-color: rgba(0, 0, 0, 0.7);
-            display: block;
-            margin: 0 auto;
-            border: 3px solid white;
-        }
-
-        table {
-            margin: 20px auto;
-            border-collapse: collapse;
-            width: 600px;
-        }
-
-        table, th, td {
-            border: 1px solid white;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: center;
-            font-size: 18px;
-        }
-
-        th {
-            background-color: #333;
-        }
-
-        #gameOverMessage, #sentenceForm, #level2Message, #resultMessage {
-            display: none;
-        }
-
-        #level2Message {
-            font-size: 24px;
-            color: yellow;
-        }
-
-        #sentenceInput {
-            width: 50%;
-            padding: 10px;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        #submitSentence {
-            padding: 10px 20px;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        #sentencesTable {
-            margin: 20px auto;
-            border-collapse: collapse;
-            width: 600px;
-        }
-
-        #sentencesTable td {
-            padding: 10px;
-            border: 1px solid white;
-            font-size: 18px;
-        }
-
-        #gameOver {
-            font-size: 30px;
-            color: red;
-        }
-
-        #comparativeSuperlativeMessage {
-            font-size: 20px;
-            color: yellow;
-            margin-top: 20px;
-        }
-    </style>
+    <title>Gelato Paradiso | Heladería Artesanal Premium</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍨</text></svg>">
 </head>
-<body onclick="PlayAudio()">
-    <h1>Adjective Collision Game</h1>
-    <canvas id="gameCanvas" width="600" height="400"></canvas>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Gelato <span>Paradiso</span></h1>
+                <p>Helado artesanal desde 1985</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sabores">Sabores</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#locales">Locales</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
 
-    <h2>Destroyed Adjectives</h2>
-    <table id="wordTable">
-        <tr>
-            <th>Word 1</th>
-            <th>Word 2</th>
-            <th>Word 3</th>
-        </tr>
-    </table>
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Auténtico helado italiano</h2>
+            <p>Elaborado con ingredientes naturales y técnicas tradicionales</p>
+            <a href="#sabores" class="btn">Descubre nuestros sabores</a>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
 
-    <h2 id="gameOverMessage">Level 1 Complete! Proceed to the next level.</h2>
-    <h2 id="level2Message">Level 2: Form Sentences using the adjectives you collected!</h2>
+    <section class="sabores" id="sabores">
+        <div class="section-header">
+            <h2>Nuestros <span>Sabores</span></h2>
+            <p>Selección premium de helados artesanales</p>
+        </div>
+        <div class="flavors-container">
+            <!-- Los sabores se cargarán dinámicamente con JavaScript -->
+        </div>
+        <div class="flavor-filter">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="classic">Clásicos</button>
+            <button class="filter-btn" data-filter="fruits">Frutales</button>
+            <button class="filter-btn" data-filter="special">Especiales</button>
+        </div>
+    </section>
 
-    <div id="sentenceForm">
-        <input type="text" id="sentenceInput" placeholder="Create a sentence using collected adjectives">
-        <button id="submitSentence">Submit Sentence</button>
+    <section class="about" id="nosotros">
+        <div class="about-content">
+            <h2>Nuestra <span>Historia</span></h2>
+            <p>Fundada en 1985 por el maestro heladero Giovanni Lombardi, Gelato Paradiso nació con la misión de llevar el auténtico sabor del helado italiano a todo el mundo. </p>
+            <p>Hoy, mantenemos viva esa tradición usando sólo los ingredientes más frescos y técnicas artesanales que han pasado de generación en generación.</p>
+            <div class="signature">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjAwIDEwMCI+PHBhdGggZD0iTTEwIDYwQzMwIDMwIDUwIDgwIDcwIDQwQzkwIDAgMTEwIDcwIDEzMCAzMEMxNTAgMCAxNzAgNTAgMTkwIDMwIiBzdHJva2U9IiM0NDQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPjx0ZXh0IHg9IjEwMCIgeT0iODAiIGZvbnQtZmFtaWx5PSJjdXJzaXZlIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5HaW92YW5uaSBMb21iYXJkaTwvdGV4dD48L3N2Zz4=" alt="Firma Giovanni Lombardi">
+            </div>
+        </div>
+        <div class="about-image">
+            <div class="image-frame"></div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>Lo que dicen <span>nuestros clientes</span></h2>
+        </div>
+        <div class="testimonials-container">
+            <!-- Los testimonios se cargarán dinámicamente con JavaScript -->
+        </div>
+    </section>
+
+    <section class="locations" id="locales">
+        <div class="section-header">
+            <h2>Nuestros <span>Locales</span></h2>
+        </div>
+        <div class="map-container">
+            <div class="map" id="map">
+                <!-- Mapa interactivo se cargará con JavaScript -->
+            </div>
+            <div class="locations-list">
+                <div class="location-card">
+                    <h3>Gelato Paradiso Centro</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 1234</p>
+                    <p><i class="fas fa-clock"></i> Lunes a Domingo: 10am - 10pm</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                </div>
+                <div class="location-card">
+                    <h3>Gelato Paradiso Norte</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Calle Secundaria 567</p>
+                    <p><i class="fas fa-clock"></i> Martes a Domingo: 11am - 9pm</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 891</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contacto</h2>
+                <p><i class="fas fa-envelope"></i> info@gelatoparadiso.com</p>
+                <p><i class="fas fa-phone"></i> +1 800 HELADOS</p>
+                <p><i class="fas fa-map-marker-alt"></i> Sede central: Av. Principal 1234</p>
+                <div class="social-media">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Tu mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>Gelato <span>Paradiso</span></h3>
+                <p>El verdadero sabor de Italia</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sabores">Sabores</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#locales">Locales</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Suscríbete a nuestro newsletter</h4>
+                <form id="newsletterForm">
+                    <input type="email" placeholder="Tu email" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Gelato Paradiso. Todos los derechos reservados.</p>
+            <p>Creado con ❤️ y mucho helado</p>
+        </div>
+    </footer>
+
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
     </div>
 
-    <h2>Created Sentences</h2>
-    <table id="sentencesTable"></table>
-
-    <div id="resultMessage"></div>
-    <div id="gameOver"></div>
-    <div id="comparativeSuperlativeMessage"></div>
-
-    <audio id="musica3" loop>
-        <source src="audio/musica3.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-    </audio>
-    
-    <script>
-        function PlayAudio() {
-            document.getElementById("musica3").play();
-        }
-        
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-
-        let ship, bullets, correctAdjectives, incorrectWords, allWords, fallingWords, destroyedWords;
-        let gameOver, level2Active;
-
-        function resetGame() {
-            ship = {
-                x: canvas.width / 2 - 25,
-                y: canvas.height - 50,
-                width: 50,
-                height: 30,
-                speed: 5,
-                movingLeft: false,
-                movingRight: false
-            };
-
-            bullets = [];
-            correctAdjectives = ["happy", "blue", "fast", "bright", "beautiful", "tall", "old", "young", "clean"];
-            incorrectWords = ["run", "cat", "house", "jump", "car", "tree", "sun"];
-            allWords = [];
-            fallingWords = [];
-            destroyedWords = [];
-            gameOver = false;
-            level2Active = false;
-
-            allWords = [...correctAdjectives, ...incorrectWords];
-            shuffle(allWords);
-
-            document.getElementById("gameOver").style.display = "none";
-            document.getElementById("gameCanvas").style.display = "block";
-            document.getElementById("sentenceForm").style.display = "none";
-            document.getElementById("resultMessage").textContent = "";
-            document.getElementById("sentencesTable").innerHTML = "";
-            document.getElementById("comparativeSuperlativeMessage").textContent = "";
-
-            gameLoop();
-        }
-
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-
-        function createWord() {
-            if (allWords.length > 0) {
-                let word = allWords.pop();
-                let isCorrect = correctAdjectives.includes(word);
-                let x = Math.random() * (canvas.width - 50);
-                fallingWords.push({ word, x, y: 0, speed: 2, isCorrect });
-            } else if (fallingWords.length === 0 && !level2Active) {
-                endLevel1();
-            }
-        }
-
-        setInterval(createWord, 2000);
-
-        window.addEventListener('keydown', (e) => {
-            if (e.code === "ArrowLeft") ship.movingLeft = true;
-            if (e.code === "ArrowRight") ship.movingRight = true;
-            if (e.code === "Space" && !level2Active) {
-                bullets.push({ x: ship.x + ship.width / 2 - 2.5, y: ship.y, width: 5, height: 10 });
-                e.preventDefault();
-            }
-        });
-
-        window.addEventListener('keyup', (e) => {
-            if (e.code === "ArrowLeft") ship.movingLeft = false;
-            if (e.code === "ArrowRight") ship.movingRight = false;
-        });
-
-        function update() {
-            if (gameOver || level2Active) return;
-
-            if (ship.movingLeft && ship.x > 0) ship.x -= ship.speed;
-            if (ship.movingRight && ship.x < canvas.width - ship.width) ship.x += ship.speed;
-
-            bullets.forEach((bullet, index) => {
-                bullet.y -= 5;
-                if (bullet.y < 0) bullets.splice(index, 1);
-            });
-
-            fallingWords.forEach((fw, index) => {
-                fw.y += fw.speed;
-                if (fw.y > canvas.height) fallingWords.splice(index, 1);
-            });
-
-            bullets.forEach((bullet, bulletIndex) => {
-                fallingWords.forEach((fw, wordIndex) => {
-                    if (
-                        bullet.x < fw.x + 50 &&
-                        bullet.x + bullet.width > fw.x &&
-                        bullet.y < fw.y + 20 &&
-                        bullet.height + bullet.y > fw.y
-                    ) {
-                        if (!fw.isCorrect) {
-                            endGame("Game Over! You destroyed an incorrect word.");
-                        } else {
-                            destroyedWords.push(fw.word);
-                            updateWordTable(fw.word);
-                        }
-                        fallingWords.splice(wordIndex, 1);
-                        bullets.splice(bulletIndex, 1);
-                    }
-                });
-            });
-        }
-
-        function updateWordTable(word) {
-            const table = document.getElementById("wordTable");
-            let lastRow = table.rows[table.rows.length - 1];
-            let emptyCell = null;
-
-            for (let i = 0; i < lastRow.cells.length; i++) {
-                if (lastRow.cells[i].textContent === "") {
-                    emptyCell = lastRow.cells[i];
-                    break;
-                }
-            }
-
-            if (!emptyCell) {
-                lastRow = table.insertRow(-1);
-                for (let i = 0; i < 3; i++) {
-                    let cell = lastRow.insertCell(i);
-                    cell.textContent = "";
-                }
-                emptyCell = lastRow.cells[0];
-            }
-
-            emptyCell.textContent = word;
-            emptyCell.style.color = getRandomColor();
-        }
-
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        function endLevel1() {
-            level2Active = true;
-            document.getElementById("gameOverMessage").style.display = "block";
-            document.getElementById("sentenceForm").style.display = "block";
-            document.getElementById("gameCanvas").style.display = "none";
-            document.getElementById("level2Message").style.display = "block";
-        }
-
-        function endGame(message) {
-            gameOver = true;
-            document.getElementById("gameOver").textContent = message;
-            document.getElementById("gameCanvas").style.display = "none";
-            document.getElementById("sentenceForm").style.display = "none";
-            document.getElementById("gameOverMessage").style.display = "none";
-            document.getElementById("resultMessage").style.display = "none";
-        }
-
-        function addSentenceToTable(sentence) {
-            const table = document.getElementById("sentencesTable");
-            const row = table.insertRow();
-            const cell = row.insertCell(0);
-            cell.textContent = sentence;
-        }
-
-        const comparativesSuperlatives = [
-            { comparative: "happier", superlative: "happiest" },
-            { comparative: "bluer", superlative: "bluest" },
-            { comparative: "faster", superlative: "fastest" },
-            { comparative: "brighter", superlative: "brightest" },
-            { comparative: "more beautiful", superlative: "most beautiful" },
-            { comparative: "taller", superlative: "tallest" },
-            { comparative: "older", superlative: "oldest" },
-            { comparative: "younger", superlative: "youngest" },
-            { comparative: "cleaner", superlative: "cleanest" }
-        ];
-
-        function isValidSentence(sentence) {
-            const foundWords = destroyedWords.filter(word => sentence.includes(word));
-            return foundWords.length > 0;
-        }
-
-        function checkComparativeOrSuperlative(word) {
-            const found = comparativesSuperlatives.find(item => 
-                item.comparative === word || item.superlative === word
-            );
-            if (found) {
-                return found.comparative === word ? "comparative" : "superlative";
-            }
-            return null;
-        }
-
-        function submitSentence() {
-    const sentenceInput = document.getElementById("sentenceInput").value;
-    let message = "";
-
-    // Limpiar mensajes previos
-    document.getElementById("resultMessage").textContent = "";
-    document.getElementById("comparativeSuperlativeMessage").textContent = "";
-
-    if (isValidSentence(sentenceInput)) {
-        addSentenceToTable(sentenceInput);
-        document.getElementById("resultMessage").textContent = "¡Frase añadida con éxito!";
-
-        // Comprobar si hay comparativos o superlativos en la frase
-        const wordsInSentence = sentenceInput.split(/\s+/);
-
-        wordsInSentence.forEach(word => {
-            const type = checkComparativeOrSuperlative(word);
-            if (type) {
-                // Asegurarse de diferenciar entre comparativo y superlativo
-                if (type === "comparative") {
-                    message += `the word "${word}" it's a comparativ3. `;
-                } else if (type === "superlative") {
-                    message += `the word "${word}" it's a superlative. `;
-                }
-            }
-        });
-
-        if (message) {
-            document.getElementById("comparativeSuperlativeMessage").textContent = message; // Actualizar mensaje
-        } else {
-            document.getElementById("comparativeSuperlativeMessage").textContent = "No comparative or superlative found! Make sure you use correct form.";
-        }
-    } else {
-        document.getElementById("resultMessage").textContent = "Invalid phrase! You must include at least one correct adjective.";
-    }
-}
-
-
-
-        document.getElementById("submitSentence").addEventListener("click", submitSentence);
-
-        function gameLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            update();
-            draw();
-            requestAnimationFrame(gameLoop);
-        }
-
-        function draw() {
-            // Draw ship
-            ctx.fillStyle = "white";
-            ctx.fillRect(ship.x, ship.y, ship.width, ship.height);
-
-            // Draw bullets
-            bullets.forEach(bullet => {
-                ctx.fillStyle = "yellow";
-                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-            });
-
-            // Draw falling words
-            fallingWords.forEach(fw => {
-                ctx.fillStyle = fw.isCorrect ? "green" : "red";
-                ctx.font = "20px Arial";
-                ctx.fillText(fw.word, fw.x, fw.y);
-            });
-        }
-
-        resetGame();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
