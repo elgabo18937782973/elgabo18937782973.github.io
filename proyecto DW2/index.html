@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicias Heladas - El Mejor Helado Artesanal</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"/>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/logo.png" alt="Logo Delicias Heladas" height="50"> Delicias Heladas
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nosotros.html">Acerca de Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sabores.html">Sabores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html">Carrito (0)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-4">
+        <section class="jumbotron text-center">
+            <h1 class="display-4">¡Bienvenido a Delicias Heladas!</h1>
+            <p class="lead">Descubre un mundo de sabores artesanales y refrescantes. ¡Tu destino para el helado perfecto!</p>
+            <p><a class="btn btn-primary btn-lg" href="sabores.html" role="button">¡Explora nuestros sabores!</a></p>
+        </section>
+
+        <section class="carousel-sabores">
+            <h2>Nuestros Sabores Destacados</h2>
+            <div class="slider">
+                <div><img src="img/sabores/chocolate.jpg" alt="Chocolate"><span>Chocolate Clásico</span></div>
+                <div><img src="img/sabores/vainilla.jpg" alt="Vainilla"><span>Vainilla Francesa</span></div>
+                <div><img src="img/sabores/fresa.jpg" alt="Fresa"><span>Fresa Cremosa</span></div>
+                <div><img src="img/sabores/menta.jpg" alt="Menta"><span>Menta Granizada</span></div>
+                <div><img src="img/sabores/dulce_de_leche.jpg" alt="Dulce de Leche"><span>Dulce de Leche Tentación</span></div>
+                <div><img src="img/sabores/cafe.jpg" alt="Café"><span>Café Arábica</span></div>
+                <div><img src="img/sabores/pistacho.jpg" alt="Pistacho"><span>Pistacho Delicia</span></div>
+                <div><img src="img/sabores/limon.jpg" alt="Limón"><span>Limón Refrescante</span></div>
+                <div><img src="img/sabores/mango.jpg" alt="Mango"><span>Mango Tropical</span></div>
+                <div><img src="img/sabores/cookies_cream.jpg" alt="Cookies & Cream"><span>Cookies & Cream</span></div>
+                <div><img src="img/sabores/frutos_bosque.jpg" alt="Frutos del Bosque"><span>Frutos del Bosque</span></div>
+                <div><img src="img/sabores/maracuya.jpg" alt="Maracuyá"><span>Maracuyá Pasión</span></div>
+                <div><img src="img/sabores/brownie_nuez.jpg" alt="Brownie con Nuez"><span>Brownie con Nuez</span></div>
+                <div><img src="img/sabores/coco.jpg" alt="Coco"><span>Coco Caribeño</span></div>
+                <div><img src="img/sabores/chicle.jpg" alt="Chicle"><span>Chicle Divertido</span></div>
+                </div>
+        </section>
+    </main>
+
+    <footer class="bg-light text-center py-3 mt-4">
+        <p>&copy; 2025 Delicias Heladas. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

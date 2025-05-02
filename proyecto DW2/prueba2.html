@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelato Dream - Heladería Artesanal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff5f5;
+            color: #333;
+        }
+        
+        .promo-banner {
+            background: #ffeb3b;
+            color: #d32f2f;
+            text-align: center;
+            padding: 0.5rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            font-family: 'Pacifico', cursive;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffeb3b;
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1501443762994-82bd5dace89a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+        }
+        
+        section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ff6b6b;
+        }
+        
+        /* Carrusel de sabores */
+        .flavors-carousel {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 20px;
+            padding: 20px 0;
+        }
+        
+        .flavor-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 250px;
+            padding: 1.5rem;
+            transition: transform 0.3s;
+            flex: 0 0 auto;
+        }
+        
+        .flavor-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .flavor-card img {
+            width: 100%;
+            border-radius: 8px;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .flavor-card h3 {
+            margin: 1rem 0 0.5rem;
+            color: #ff6b6b;
+        }
+        
+        .flavor-card .price {
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 1.2rem;
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+        
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        #prevBtn {
+            left: 10px;
+        }
+        
+        #nextBtn {
+            right: 10px;
+        }
+        
+        .testimonials {
+            background: linear-gradient(135deg, #f8bbd0, #fce4ec);
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #ff6b6b;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .flavor-card {
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PRIMERO: Banner promocional -->
+    <div class="promo-banner">
+        🍦 ¡HOY: 2x1 en helados de fresa! - Abiertos hasta medianoche 🍦
+    </div>
+    
+    <header>
+        <div class="logo">Gelato Dream</div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sabores">Sabores</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Déjate llevar por el sabor</h1>
+            <p>Helados artesanales hechos con amor y los mejores ingredientes</p>
+            <a href="#sabores" class="btn">Descubre nuestros sabores</a>
+        </div>
+    </section>
+    
+    <section id="sabores">
+        <h2 class="section-title">Nuestros 20 Sabores Exclusivos</h2>
+        <div class="flavors-carousel">
+            <button class="carousel-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-container" id="carousel">
+                <!-- Sabores 1-5 -->
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1560008581-09826d1de69e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Vainilla Bourbon">
+                    <h3>Vainilla Bourbon</h3>
+                    <p>Vainilla de Madagascar con toques de bourbon</p>
+                    <div class="price">25 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1516559828984-fb3b99548b21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Chocolate Negro">
+                    <h3>Chocolate Negro 70%</h3>
+                    <p>Intenso sabor a cacao con trozos de chocolate</p>
+                    <div class="price">28 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1551751299-1b51cab2694c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fresa Silvestre">
+                    <h3>Fresa Silvestre</h3>
+                    <p>Fresas naturales en su punto perfecto</p>
+                    <div class="price">22 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1630424237797-c9c8fecf0ffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Menta Chocolate">
+                    <h3>Menta Chocolate</h3>
+                    <p>Refrescante menta con trozos de chocolate</p>
+                    <div class="price">26 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Dulce de Leche">
+                    <h3>Dulce de Leche</h3>
+                    <p>Clásico argentino con rizos de caramelo</p>
+                    <div class="price">24 Bs.</div>
+                </div>
+                
+                <!-- Sabores 6-10 -->
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1532117364815-720cd35ff6e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Limón Siciliano">
+                    <h3>Limón Siciliano</h3>
+                    <p>Ácido y refrescante con ralladura natural</p>
+                    <div class="price">20 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Cookies & Cream">
+                    <h3>Cookies & Cream</h3>
+                    <p>Vainilla con trozos de galleta Oreo</p>
+                    <div class="price">27 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mango Tropical">
+                    <h3>Mango Tropical</h3>
+                    <p>Mango fresco con un toque de jengibre</p>
+                    <div class="price">23 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1481391032119-d89fee407e44?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Avellana Crocante">
+                    <h3>Avellana Crocante</h3>
+                    <p>Avellanas tostadas con trozos crocantes</p>
+                    <div class="price">30 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1534531173927-aeb928d54385?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Frambuesa Champagne">
+                    <h3>Frambuesa Champagne</h3>
+                    <p>Frambuesas con toques de champagne francés</p>
+                    <div class="price">32 Bs.</div>
+                </div>
+                
+                <!-- Sabores 11-15 -->
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-154159918877-4c0b4456b7b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Pistacho Italiano">
+                    <h3>Pistacho Italiano</h3>
+                    <p>Pistachos de Bronte con sal marina</p>
+                    <div class="price">35 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Café Arábica">
+                    <h3>Café Arábica</h3>
+                    <p>Granos de café 100% colombianos</p>
+                    <div class="price">25 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Cheesecake Frutos Rojos">
+                    <h3>Cheesecake Frutos Rojos</h3>
+                    <p>Base de galleta y mermelada de frutos rojos</p>
+                    <div class="price">28 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1611250282006-4484dd3fba6b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Coco Caribeño">
+                    <h3>Coco Caribeño</h3>
+                    <p>Coco fresco con trozos de coco tostado</p>
+                    <div class="price">22 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1612203985729-70726954388c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Tiramisú Clásico">
+                    <h3>Tiramisú Clásico</h3>
+                    <p>Café, mascarpone y bizcochos de soletilla</p>
+                    <div class="price">30 Bs.</div>
+                </div>
+                
+                <!-- Sabores 16-20 -->
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1617038221558-7e0371a5c5e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Maracuyá Passion">
+                    <h3>Maracuyá Passion</h3>
+                    <p>Maracuyá brasileño con un toque de vainilla</p>
+                    <div class="price">24 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Matcha Japonés">
+                    <h3>Matcha Japonés</h3>
+                    <p>Té matcha grado ceremonial de Uji</p>
+                    <div class="price">34 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1609951651556-5334e2706168?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Red Velvet">
+                    <h3>Red Velvet</h3>
+                    <p>Base de bizcocho rojo con frosting de queso</p>
+                    <div class="price">29 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Banana Split">
+                    <h3>Banana Split</h3>
+                    <p>Plátano, chocolate, fresa y nueces</p>
+                    <div class="price">26 Bs.</div>
+                </div>
+                
+                <div class="flavor-card">
+                    <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Salted Caramel">
+                    <h3>Salted Caramel</h3>
+                    <p>Caramelo artesanal con flor de sal</p>
+                    <div class="price">27 Bs.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="nosotros" style="background-color: #ffebee;">
+        <h2 class="section-title">Nuestra Historia</h2>
+        <p style="max-width: 800px; margin: 0 auto 2rem; line-height: 1.6;">
+            Gelato Dream nació en 2020 como un proyecto universitario que se convirtió en pasión. 
+            Usamos solo ingredientes naturales y técnicas tradicionales italianas para crear helados 
+            cremosos y llenos de sabor. Cada cucharada es una experiencia única.
+        </p>
+        <img src="https://images.unsplash.com/photo-1513451732213-5775a1c40335?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipo Gelato Dream" style="width: 100%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    </section>
+    
+    <section id="contacto">
+        <h2 class="section-title">Visítanos</h2>
+        <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+            <div style="text-align: left;">
+                <h3 style="color: #ff6b6b;">Horario</h3>
+                <p>Lunes a Viernes: 12pm - 10pm</p>
+                <p>Sábado y Domingo: 11am - 11pm</p>
+            </div>
+            <div style="text-align: left;">
+                <h3 style="color: #ff6b6b;">Dirección</h3>
+                <p>Calle Dulce 123, Ciudad Universitaria</p>
+                <p>Tel: 555-123-4567</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ÚLTIMO: Testimonios antes del footer -->
+    <section style="background-color: #f9f9f9;">
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <div class="testimonials">
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Cliente 1">
+                <h3>María G.</h3>
+                <p>"El mejor helado que he probado en mi vida. ¡La vainilla bourbon es adictiva!" ⭐⭐⭐⭐⭐</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Cliente 2">
+                <h3>Carlos R.</h3>
+                <p>"Perfecto balance entre textura cremosa y sabores naturales. Mi lugar favorito." ⭐⭐⭐⭐⭐</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="logo" style="font-size: 2rem;">Gelato Dream</div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2023 Gelato Dream - Proyecto Universitario de Ingeniería en Sistemas</p>
+        <p>5to Semestre - Universidad Tecnológica</p>
+    </footer>
+
+    <script>
+        // Carrusel interactivo
+        const carousel = document.getElementById('carousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+        const cardWidth = 290; // Ancho de cada tarjeta + gap
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < 15) { // 20 sabores - 5 visibles
+                currentIndex++;
+                carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
