@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa del Café</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            background-color: #1a1a1a;
+        }
+
+        /* Hero Section (Portada con imagen de fondo) */
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Barra de navegación transparente */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Efecto al hacer scroll */
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e6c9a8;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e6c9a8;
+        }
+
+        /* Contenido principal */
+        .hero-content {
+            margin-top: auto;
+            margin-bottom: auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            color: #e6c9a8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .slogan {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Secciones adicionales (para demostrar el scroll) */
+        section {
+            padding: 100px 50px;
+            min-height: 50vh;
+        }
+
+        #inicio {
+            background-color: #2a2a2a;
+        }
+
+        #servicios {
+            background-color: #1f1f1f;
+        }
+
+        #productos {
+            background-color: #2a2a2a;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #e6c9a8;
+            margin-bottom: 30px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra de navegación transparente -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">CASA DEL CAFÉ</a>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>CASA DEL CAFÉ</h1>
+            <p class="slogan">El café es la excusa perfecta para tomarse un momento de calma y saborear la vida.</p>
+        </div>
+    </div>
+
+    <!-- Secciones de ejemplo -->
+    <section id="inicio">
+        <h2 class="section-title">Inicio</h2>
+        <p>Contenido de la sección de inicio...</p>
+    </section>
+
+    <section id="servicios">
+        <h2 class="section-title">Servicios</h2>
+        <p>Contenido de la sección de servicios...</p>
+    </section>
+
+    <section id="productos">
+        <h2 class="section-title">Productos</h2>
+        <p>Contenido de la sección de productos...</p>
+    </section>
+
+    <script>
+        // Efecto de cambio en la navbar al hacer scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

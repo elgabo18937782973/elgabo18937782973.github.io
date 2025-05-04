@@ -2,175 +2,131 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gelato Paradiso | Heladería Artesanal Premium</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍨</text></svg>">
+    <title>Heladeria Anonimus</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="proyecto.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="icon" href="imagenes/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <h1>Gelato <span>Paradiso</span></h1>
-                <p>Helado artesanal desde 1985</p>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#sabores">Sabores</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#locales">Locales</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
+
+    <header> 
+        <div class="logo">
+            <img src="imagenes/icono.png" alt="HeladerIA">
         </div>
+        <nav>
+            <ul> 
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <h2>Auténtico helado italiano</h2>
-            <p>Elaborado con ingredientes naturales y técnicas tradicionales</p>
-            <a href="#sabores" class="btn">Descubre nuestros sabores</a>
-        </div>
-        <div class="hero-scroll">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
-
-    <section class="sabores" id="sabores">
-        <div class="section-header">
-            <h2>Nuestros <span>Sabores</span></h2>
-            <p>Selección premium de helados artesanales</p>
-        </div>
-        <div class="flavors-container">
-            <!-- Los sabores se cargarán dinámicamente con JavaScript -->
-        </div>
-        <div class="flavor-filter">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="classic">Clásicos</button>
-            <button class="filter-btn" data-filter="fruits">Frutales</button>
-            <button class="filter-btn" data-filter="special">Especiales</button>
-        </div>
-    </section>
-
-    <section class="about" id="nosotros">
-        <div class="about-content">
-            <h2>Nuestra <span>Historia</span></h2>
-            <p>Fundada en 1985 por el maestro heladero Giovanni Lombardi, Gelato Paradiso nació con la misión de llevar el auténtico sabor del helado italiano a todo el mundo. </p>
-            <p>Hoy, mantenemos viva esa tradición usando sólo los ingredientes más frescos y técnicas artesanales que han pasado de generación en generación.</p>
-            <div class="signature">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjAwIDEwMCI+PHBhdGggZD0iTTEwIDYwQzMwIDMwIDUwIDgwIDcwIDQwQzkwIDAgMTEwIDcwIDEzMCAzMEMxNTAgMCAxNzAgNTAgMTkwIDMwIiBzdHJva2U9IiM0NDQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPjx0ZXh0IHg9IjEwMCIgeT0iODAiIGZvbnQtZmFtaWx5PSJjdXJzaXZlIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5HaW92YW5uaSBMb21iYXJkaTwvdGV4dD48L3N2Zz4=" alt="Firma Giovanni Lombardi">
-            </div>
-        </div>
-        <div class="about-image">
-            <div class="image-frame"></div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="section-header">
-            <h2>Lo que dicen <span>nuestros clientes</span></h2>
-        </div>
-        <div class="testimonials-container">
-            <!-- Los testimonios se cargarán dinámicamente con JavaScript -->
-        </div>
-    </section>
-
-    <section class="locations" id="locales">
-        <div class="section-header">
-            <h2>Nuestros <span>Locales</span></h2>
-        </div>
-        <div class="map-container">
-            <div class="map" id="map">
-                <!-- Mapa interactivo se cargará con JavaScript -->
-            </div>
-            <div class="locations-list">
-                <div class="location-card">
-                    <h3>Gelato Paradiso Centro</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 1234</p>
-                    <p><i class="fas fa-clock"></i> Lunes a Domingo: 10am - 10pm</p>
-                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+   
+    <section class="hero">
+        <div id="carrusel-contenido" >
+            <div id="carrusel-caja">
+                <div class="carrusel-elemento">
+                    <img class="imagenes" src="imagenes/bit.jpg" >
                 </div>
-                <div class="location-card">
-                    <h3>Gelato Paradiso Norte</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Calle Secundaria 567</p>
-                    <p><i class="fas fa-clock"></i> Martes a Domingo: 11am - 9pm</p>
-                    <p><i class="fas fa-phone"></i> +1 234 567 891</p>
+                <div class="carrusel-elemento">
+                    <img class="imagenes" src="imagenes/portada2.jpg" >
+                </div>
+                <div class="carrusel-elemento">
+                    <img class="imagenes" src="imagenes/portada3.jpg" >
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="contact" id="contacto">
-        <div class="contact-container">
-            <div class="contact-info">
-                <h2>Contacto</h2>
-                <p><i class="fas fa-envelope"></i> info@gelatoparadiso.com</p>
-                <p><i class="fas fa-phone"></i> +1 800 HELADOS</p>
-                <p><i class="fas fa-map-marker-alt"></i> Sede central: Av. Principal 1234</p>
-                <div class="social-media">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </div>
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <input type="text" id="name" placeholder="Nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" placeholder="Tu mensaje" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Enviar mensaje</button>
-                </form>
-            </div>
+            
+        <div class="hero-text">
+            <img src="imagenes/logo-central.png" alt="Imagen 1">    
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h3>Gelato <span>Paradiso</span></h3>
-                <p>El verdadero sabor de Italia</p>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#sabores">Sabores</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#locales">Locales</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-newsletter">
-                <h4>Suscríbete a nuestro newsletter</h4>
-                <form id="newsletterForm">
-                    <input type="email" placeholder="Tu email" required>
-                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Gelato Paradiso. Todos los derechos reservados.</p>
-            <p>Creado con ❤️ y mucho helado</p>
-        </div>
-    </footer>
+    <!--Sección de Quienes somos xd -->
+    <section id="Nosotros" style="margin-top: 110px;">
+        <h2 class="Estilo_Titulo">Quienes somos   </h2>
+        <p style="text-align:center; color:azure; max-width: 800px; margin: 0 auto 2rem; font-size: 18px">La Heladería Anonimus
+           es un lugar encantador donde los amantes del helado pueden disfrutar de 
+           una amplia variedad de sabores artesanales. 
+           Desde los clásicos como chocolate y vainilla hasta 
+           opciones más innovadoras como lavanda y miel,
+            cada bocado es una explosión de sabor. 
+            El ambiente es acogedor y el personal es amable, 
+            lo que hace que cada visita sea especial. Sin duda, 
+            un lugar que no te puedes perder si eres un amante del helado.</p>
+          </section>
 
-    <div class="scroll-top">
-        <i class="fas fa-arrow-up"></i>
+          <div class="contenedor-imagenes">
+            <div class="imagen-con-texto">
+              <img src="https://i.pinimg.com/736x/bf/54/aa/bf54aaeeedc20b8a5277af78db25c600.jpg" alt="Helado 1">
+              <div class="frase">Sabores únicos</div>
+            </div>
+            <div class="imagen-con-texto">
+              <img src="https://i.pinimg.com/736x/44/68/62/4468624d9344cd75c5cd2c24573ad7cd.jpg" alt="Helado 2">
+              <div class="frase">Amor en cada proceso</div>
+            </div>
+            <div class="imagen-con-texto">
+              <img src="imagenes/portada3.jpg" alt="Helado 3">
+              <div class="frase">La mejor atención</div>
+            </div>
+          </div>
+          
+      
+       <section class="seccion-ubi">
+       <div class="ubi">
+        <img src="https://i.pinimg.com/736x/6d/ac/40/6dac4035cba099fe234cbb59436f716c.jpg" alt="Imagen descriptiva">
+        <div class="contenido-texto">
+          <h2 class="Estilo_Titulo">Ubicación</h2>
+          <p class="p" style="text-align:center; color:azure; max-width: 800px; margin: 0 auto 2rem; font-size: 18px">Estamos ubicados en la Calle Falsa 123, Ciudad Imaginaria.
+            <br> Ven a visitarnos y disfruta de nuestros deliciosos helados.</p>   
+            <h2 class="Estilo_Titulo">Horarios ⌚</h2>
+          <p style="text-align:center; color:azure; max-width: 800px; margin: 0 auto 2rem; font-size: 18px">Lunes a Viernes: 10:00 AM - 10:00 PM</p>
+          <p style="text-align:center; color:azure; max-width: 800px; margin: 0 auto 2rem; font-size: 18px">Sábados y Domingos: 11:00 AM - 11:00 PM</p>
+       
+          </div>
+      </div>
+    </section>
+
+  <footer class="text-center text-md-start">
+    <div class="container">
+      <div class="row text-center text-md-start">
+        
+        <!-- Logo -->
+        <div class="col-md-4 mb-4 footer-logo">
+          <img src="imagenes/logo-central.png" alt="Anonimus Logo">
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="col-md-4 mb-4">
+          <p>Síguenos en <strong>Redes Sociales</strong><br>
+          para no perderte novedades y <strong>DESCUENTOS</strong>.</p>
+          <div class="social-icons">
+            <img src="imagenes/facebook.png" alt="Facebook">
+            <img src="imagenes/instagram.png" alt="Instagram">
+            <img src="imagenes/whatsapp.png" alt="whatsapp">
+          </div>
+        </div>
+
+        <!-- App Store -->
+        <div class="col-md-4 mb-4">
+          <p>HeladerIA<br>¡Desde tu celular!</p>
+          <p><strong>DESCARGA NUESTRA APP</strong></p>
+          <div class="app-icons">
+            <img src="imagenes/apple.png" alt="App Store">
+            <img src="imagenes/google.png" alt="Google Play">
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        Diseño y desarrollo por <strong>Grupo Anonimus</strong> | Todos los derechos reservados | © Anonimus Ice Cream    2025
+      </div>
     </div>
+  </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>

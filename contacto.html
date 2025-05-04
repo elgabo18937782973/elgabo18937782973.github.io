@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Contactanos</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="proyecto.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="icon" href="imagenes/icono.png" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </head>
+<body>
+    
+    <header> 
+        <div class="logo">
+            <img src="imagenes/icono.png" alt="HeladerIA">
+        </div>
+        <nav>
+            <ul> 
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Producto</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br>
+    <br>
+    <main class="contacto">
+        <h2> Envianos un mensaje</h2>
+        <form>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Tu nombre completo !!" required>
+          </div>
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo" placeholder="correo@ejemplo.com" required>
+          </div>
+          <div class="mb-3">
+            <label for="asunto" class="form-label">Asunto</label>
+            <input type="text" class="form-control" id="asunto"  required>
+          </div>
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribenos si tienes algun reclamo, consulta o sugerencia...." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Enviar mensaje</button>
+        </form>
+      </main>
+      <footer class="text-center text-md-start">
+        <div class="container">
+          <div class="row text-center text-md-start">
+            
+            <!-- Logo -->
+            <div class="col-md-4 mb-4 footer-logo">
+              <img src="imagenes/logo-central.png" alt="Anonimus Logo">
+            </div>
+    
+            <!-- Redes Sociales -->
+            <div class="col-md-4 mb-4">
+              <p>Síguenos en <strong>Redes Sociales</strong><br>
+              para no perderte novedades y <strong>DESCUENTOS</strong>.</p>
+              <div class="social-icons">
+                <img src="imagenes/facebook.png" alt="Facebook">
+                <img src="imagenes/instagram.png" alt="Instagram">
+                <img src="imagenes/whatsapp.png" alt="whatsapp">
+              </div>
+            </div>
+    
+            <!-- App Store -->
+            <div class="col-md-4 mb-4">
+              <p>HeladerIA<br>¡Desde tu celular!</p>
+              <p><strong>DESCARGA NUESTRA APP</strong></p>
+              <div class="app-icons">
+                <img src="imagenes/apple.png" alt="App Store">
+                <img src="imagenes/google.png" alt="Google Play">
+              </div>
+            </div>
+          </div>
+    
+          <div class="footer-bottom">
+            Diseño y desarrollo por <strong>Grupo Anonimus</strong> | Todos los derechos reservados | © Anonimus Ice Cream    2025
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa del Café</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Playfair Display', serif;
+            background-image: url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .menu-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            color: #e6c9a8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .item-name {
+            font-weight: bold;
+        }
+
+        .item-price {
+            color: #e6c9a8;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>CASA DEL CAFE</h1>
+        <p>El café es la excusa perfecta para tomarse un momento de calma y saborear la vida.</p>
+        
+        <div class="menu-items">
+            <div class="menu-item">
+                <span class="item-name">Espresso</span>
+                <span class="item-price">$2.50</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Cappuccino</span>
+                <span class="item-price">$3.50</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Latte</span>
+                <span class="item-price">$4.00</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Mocha</span>
+                <span class="item-price">$4.50</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Café Americano</span>
+                <span class="item-price">$3.00</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
