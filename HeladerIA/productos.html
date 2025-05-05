@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="icon" href="imagenes/icono.png" type="image/x-icon">
+
+    <style>
+        .card img {
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .btn-agregar {
+            background-color: #e68fac;
+            color: white;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            
+            margin-left: 60px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn-agregar:hover{
+            background-color: #c2185b;
+        }
+
+        /* Estilos para el carrito */
+        .cart-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(255, 107, 198, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .cart-popup button{
+          background-color: #e67097;
+        }
+
+        .cart-overlay {
+            display: none;
+            position: fixed;
+            top: 0; 
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(226, 215, 221, 0.5);
+            z-index: 999;
+        }
+
+        .cart-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #e6bed9;
+            color: rgb(99, 3, 81);
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #cardsContainer {
+          max-width: 1500px;
+          margin: 0 auto;
+          padding: 20px;
+         
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body style="padding-top: 100px;">
+    <header>
+        <div class="logo">
+            <img src="imagenes/icono.png" alt="HeladerIA">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="productos">
+        <div class="hola">
+            <h2 class="Estilo_Titulo">Nuestros Productos</h2>
+            <p style="text-align:center; color:azure; max-width: 800px; margin: 0 auto 2rem; font-size: 19px">En Heladería Anonimus ofrecemos una amplia variedad de helados artesanales, elaborados con los mejores
+                ingredientes. Aquí te presentamos algunos de nuestros sabores más populares:</p>
+        </div>
+     
+        <!-- Contenedor de productos -->
+        <div id="cardsContainer" class="row"></div>
+    </div>
+
+    <!-- Seccion Icono del carrito -->
+    <div class="cart-popup">
+        <h4 style="color: #fff;">Tu Carrito</h4>
+        <ul id="carritoLista"></ul>
+        <p style="color: #fff;"> Total: Bs.<span id="totalCarrito">0.00</span></p>
+        <button  class="btn btn-success" onclick="generarYDescargarPDF()">Finalizar Venta</button>
+        <button class="btn btn-danger" onclick="toggleCartPopup()">Cerrar</button>
+    </div>
+
+    <div class="cart-overlay" onclick="toggleCartPopup()"></div>
+
+    <div class="cart-icon" onclick="toggleCartPopup()">🛒 <span id="cartCount">0</span></div>
+
+    <script>
+        const sabores = [
+            { nombre: "Vainilla", precioBase: 5, imagen: "imagenes/vainilla.jpg" },
+            { nombre: "Chocolate", precioBase: 7, imagen: "imagenes/chocolate.jpg" },
+            { nombre: "Fresa", precioBase: 6, imagen: "imagenes/fresa.jpg" },
+            { nombre: "Maracuya", precioBase: 8, imagen: "imagenes/maracuya.jpg" },
+            { nombre: "Menta Chocolate", precioBase: 2, imagen: "imagenes/mentachocolate.jpg" },
+            { nombre: "Pistacho", precioBase: 5, imagen: "imagenes/pistacho.jpg" },
+            { nombre: "Granizado", precioBase: 4, imagen: "imagenes/granizado.jpg" },
+            { nombre: "Mix Bits", precioBase: 4, imagen: "imagenes/sabor.jpg" }
+        ];
+
+        const toppingsDisponibles = [
+            { nombre: "Chocolate líquido", precio: 3 },
+            { nombre: "Galleta molida", precio: 3 },
+            { nombre: "Leche condensada", precio: 4 },
+            { nombre: "Chispas de colores", precio: 4 },
+            { nombre: "Fresas en trozos", precio: 3 }
+        ];
+
+        const carrito = [];
+
+        function crearCard(sabor) {
+            const card = document.createElement('div');
+            card.className = 'col-md-3 mb-4';
+            card.innerHTML = `
+              <div class="card h-100">
+                <img src="${sabor.imagen}" class="card-img-top" alt="${sabor.nombre}">
+                <div class="card-body">
+                  <h4 class="card-title">${sabor.nombre}</h5>
+                  <p>Precio base por bola: Bs.${sabor.precioBase.toFixed(2)}</p>
+                  <form onsubmit="agregarAlCarrito(event, '${sabor.nombre}', ${sabor.precioBase})">
+                    <div class="mb-2">
+                      <label>Cantidad de bolas (1-4)</label>
+                      <input type="number" min="1" max="4" required class="form-control" name="bolas">
+                    </div>
+                    <div class="mb-2">
+                      <label>Cantidad de pedidos</label>
+                      <input type="number" min="1" required class="form-control" name="cantidad">
+                    </div>
+                    <div class="mb-2 toppings">
+                      <label>Aderezos:</label>
+                      ${toppingsDisponibles.map((topping, index) => `
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="toppings" value="${topping.precio}" id="topping-${sabor.nombre}-${index}">
+                          <label class="form-check-label" for="topping-${sabor.nombre}-${index}">
+                            ${topping.nombre} (Bs.${topping.precio.toFixed(2)})
+                          </label>
+                        </div>`).join('')}
+                    </div>
+                
+                    <button style="position:center;" type="submit" class="btn-agregar">Agregar al carrito</button> 
+                  </form>
+                </div>
+              </div>`;
+            return card;
+        }
+
+        function renderizarCards() {
+            const contenedor = document.getElementById('cardsContainer');
+            sabores.forEach(sabor => contenedor.appendChild(crearCard(sabor)));
+        }
+
+        function agregarAlCarrito(event, sabor, precioBase) {
+            event.preventDefault();
+            const form = event.target;
+            const bolas = parseInt(form.bolas.value);
+            const cantidad = parseInt(form.cantidad.value);
+            const toppingsSeleccionados = Array.from(form.querySelectorAll('input[name="toppings"]:checked'));
+            const precioToppings = toppingsSeleccionados.reduce((sum, topping) => sum + parseFloat(topping.value), 0);
+            const nombresToppings = toppingsSeleccionados.map(t => t.nextElementSibling.textContent);
+            const subtotal = ((precioBase * bolas + precioToppings) * cantidad).toFixed(2);
+            carrito.push({ sabor, bolas, cantidad, toppings: nombresToppings, subtotal });
+            actualizarCarrito();
+            form.reset();
+        }
+
+        function actualizarCarrito() {
+            const lista = document.getElementById('carritoLista');
+            const totalElem = document.getElementById('totalCarrito');
+            const countElem = document.getElementById('cartCount');
+            lista.innerHTML = '';
+            let total = 0;
+            carrito.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'd-flex justify-content-between align-items-center';
+                li.innerHTML = `
+                    ${item.cantidad}x ${item.sabor} (${item.bolas} bolas)
+                    ${item.toppings.length ? `- Aderezos: ${item.toppings.join(', ')}` : ''}
+                    - Bs.${item.subtotal}
+                    <div>
+                        <button class="btn btn-sm btn-warning" onclick="cambiarCantidad(${index}, 1)"> ➕ </button>
+                        <button class="btn btn-sm btn-warning" onclick="cambiarCantidad(${index}, -1)"> ➖ </button>
+                        <button class="btn btn-sm btn-danger" onclick="eliminarItem(${index})">❌</button>
+                    </div>`;
+                lista.appendChild(li);
+                total += parseFloat(item.subtotal);
+            });
+            totalElem.textContent = total.toFixed(2);
+            countElem.textContent = carrito.length;
+        }
+
+        function cambiarCantidad(index, cambio) {
+            const item = carrito[index];
+            item.cantidad += cambio;
+            if (item.cantidad <= 0) item.cantidad = 1;
+            const precioBase = sabores.find(s => s.nombre === item.sabor).precioBase;
+            const precioToppings = item.toppings.reduce((sum, nombreTopping) => {
+                const topping = toppingsDisponibles.find(t => nombreTopping.includes(t.nombre));
+                return sum + (topping ? topping.precio : 0);
+            }, 0);
+            item.subtotal = ((precioBase * item.bolas + precioToppings) * item.cantidad).toFixed(2);
+            actualizarCarrito();
+        }
+
+        function eliminarItem(index) {
+            carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+
+        function generarYDescargarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(20);
+            
+            doc.text("Factura - Heladeria Anonimus Ice Cream", 10, 20);
+            
+            let y = 30;
+            carrito.forEach((item, i) => {
+                doc.setFontSize(12);
+                doc.text(`${i + 1}. ${item.cantidad}x ${item.sabor} (${item.bolas} bolas)`, 10, y);
+                y += 7;
+                if (item.toppings.length) {
+                    doc.text(`   Aderezos: ${item.toppings.join(', ')}`, 10, y);
+                    y += 7;
+                }
+                doc.text(`   Subtotal: Bs.${item.subtotal}`, 10, y);
+                y += 10;
+            });
+            doc.setFontSize(14);
+            doc.text(`Total: Bs.${document.getElementById('totalCarrito').textContent}`, 10, y + 10);
+            const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+            if (usuarioActivo && usuarioActivo.email) {
+                doc.setFontSize(12);
+                doc.text(`Cliente: ${usuarioActivo.email}`, 10, y + 20);
+            }
+            doc.save("factura_helado.pdf");
+        }
+
+        function toggleCartPopup() {
+            const popup = document.querySelector('.cart-popup');
+            const overlay = document.querySelector('.cart-overlay');
+            popup.style.display = (popup.style.display === 'block' ? 'none' : 'block');
+            overlay.style.display = (overlay.style.display === 'block' ? 'none' : 'block');
+        }
+
+        renderizarCards();
+    </script>
+
+    <footer class="text-center text-md-start">
+      <div class="container">
+        <div class="row text-center text-md-start">
+          
+          <!-- Logo -->
+          <div class="col-md-4 mb-4 footer-logo">
+            <img src="imagenes/logo-central.png" alt="Anonimus Logo">
+          </div>
+  
+          <!-- Redes Sociales -->
+          <div class="col-md-4 mb-4">
+            <p>Síguenos en <strong>Redes Sociales</strong><br>
+            para no perderte novedades y <strong>DESCUENTOS</strong>.</p>
+            <div class="social-icons">
+              <img src="imagenes/facebook.png" alt="Facebook">
+              <img src="imagenes/instagram.png" alt="Instagram">
+              <img src="imagenes/whatsapp.png" alt="whatsapp">
+            </div>
+          </div>
+  
+          <!-- App Store -->
+          <div class="col-md-4 mb-4">
+            <p>HeladerIA<br>¡Desde tu celular!</p>
+            <p><strong>DESCARGA NUESTRA APP</strong></p>
+            <div class="app-icons">
+              <img src="imagenes/apple.png" alt="App Store">
+              <img src="imagenes/google.png" alt="Google Play">
+            </div>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          Diseño y desarrollo por <strong>Grupo Anonimus</strong> | Todos los derechos reservados | © Anonimus Ice Cream    2025
+        </div>
+      </div>
+    </footer>
+</body>
+
+</html>
