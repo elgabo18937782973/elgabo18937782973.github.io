@@ -7,23 +7,27 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="icon" href="imagenes/icono.png" type="image/x-icon">
+
     <style>
         .card img {
             height: 180px;
             object-fit: cover;
         }
+
         .btn-agregar {
-            background-color: #e91e63;
+            background-color: #e68fac;
             color: white;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
             
-            border-radius: 4px;
-            border:none;
-            posi
+            margin-left: 60px;
+            border-radius: 5px;
+            border: none;
         }
 
-        .btn-agregar:hover {
+        .btn-agregar:hover{
             background-color: #c2185b;
-            
         }
 
         /* Estilos para el carrito */
@@ -33,7 +37,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgb(216, 11, 172);
+            background: rgb(255, 107, 198, 0.7);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -41,14 +45,19 @@
             max-width: 400px;
             width: 100%;
         }
+
+        .cart-popup button{
+          background-color: #e67097;
+        }
+
         .cart-overlay {
             display: none;
             position: fixed;
-            top: 0;
+            top: 0; 
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(218, 7, 7, 0.5);
+            background: rgba(226, 215, 221, 0.5);
             z-index: 999;
         }
 
@@ -56,14 +65,22 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #7a1057;
-            color: rgb(207, 38, 176);
+            background-color: #e6bed9;
+            color: rgb(99, 3, 81);
             border-radius: 50%;
             padding: 15px;
             font-size: 20px;
             cursor: pointer;
         }
+
+        #cardsContainer {
+          max-width: 1500px;
+          margin: 0 auto;
+          padding: 20px;
+         
+        }
     </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
@@ -84,19 +101,20 @@
     <div class="productos">
         <div class="hola">
             <h2 class="Estilo_Titulo">Nuestros Productos</h2>
-            <p style="text-align:center; color:azure; max-width: 800px; margin: 0 auto 2rem; font-size: 18px">En Heladería Anonimus ofrecemos una amplia variedad de helados artesanales, elaborados con los mejores
+            <p style="text-align:center; color:azure; max-width: 800px; margin: 0 auto 2rem; font-size: 19px">En Heladería Anonimus ofrecemos una amplia variedad de helados artesanales, elaborados con los mejores
                 ingredientes. Aquí te presentamos algunos de nuestros sabores más populares:</p>
         </div>
-      </section>
+     
         <!-- Contenedor de productos -->
         <div id="cardsContainer" class="row"></div>
     </div>
 
+    <!-- Seccion Icono del carrito -->
     <div class="cart-popup">
-        <h4>Tu Carrito</h4>
+        <h4 style="color: #fff;">Tu Carrito</h4>
         <ul id="carritoLista"></ul>
-        <p>Total: Bs.<span id="totalCarrito">0.00</span></p>
-        <button class="btn btn-success" onclick="generarYDescargarPDF()">Generar PDF</button>
+        <p style="color: #fff;"> Total: Bs.<span id="totalCarrito">0.00</span></p>
+        <button  class="btn btn-success" onclick="generarYDescargarPDF()">Finalizar Venta</button>
         <button class="btn btn-danger" onclick="toggleCartPopup()">Cerrar</button>
     </div>
 
@@ -112,7 +130,8 @@
             { nombre: "Maracuya", precioBase: 8, imagen: "imagenes/maracuya.jpg" },
             { nombre: "Menta Chocolate", precioBase: 2, imagen: "imagenes/mentachocolate.jpg" },
             { nombre: "Pistacho", precioBase: 5, imagen: "imagenes/pistacho.jpg" },
-            { nombre: "Granizado", precioBase: 4, imagen: "imagenes/granizado.jpg" }
+            { nombre: "Granizado", precioBase: 4, imagen: "imagenes/granizado.jpg" },
+            { nombre: "Mix Bits", precioBase: 4, imagen: "imagenes/sabor.jpg" }
         ];
 
         const toppingsDisponibles = [
@@ -132,7 +151,7 @@
               <div class="card h-100">
                 <img src="${sabor.imagen}" class="card-img-top" alt="${sabor.nombre}">
                 <div class="card-body">
-                  <h5 class="card-title">${sabor.nombre}</h5>
+                  <h4 class="card-title">${sabor.nombre}</h5>
                   <p>Precio base por bola: Bs.${sabor.precioBase.toFixed(2)}</p>
                   <form onsubmit="agregarAlCarrito(event, '${sabor.nombre}', ${sabor.precioBase})">
                     <div class="mb-2">
@@ -154,7 +173,7 @@
                         </div>`).join('')}
                     </div>
                 
-                    <button type="submit" class="btn-agregar">Agregar al carrito</button> 
+                    <button style="position:center;" type="submit" class="btn-agregar">Agregar al carrito</button> 
                   </form>
                 </div>
               </div>`;
@@ -194,8 +213,8 @@
                     ${item.toppings.length ? `- Aderezos: ${item.toppings.join(', ')}` : ''}
                     - Bs.${item.subtotal}
                     <div>
-                        <button class="btn btn-sm btn-warning" onclick="cambiarCantidad(${index}, 1)">+</button>
-                        <button class="btn btn-sm btn-warning" onclick="cambiarCantidad(${index}, -1)">-</button>
+                        <button class="btn btn-sm btn-warning" onclick="cambiarCantidad(${index}, 1)"> ➕ </button>
+                        <button class="btn btn-sm btn-warning" onclick="cambiarCantidad(${index}, -1)"> ➖ </button>
                         <button class="btn btn-sm btn-danger" onclick="eliminarItem(${index})">❌</button>
                     </div>`;
                 lista.appendChild(li);
@@ -227,7 +246,9 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             doc.setFontSize(20);
-            doc.text("Factura - Tienda de Helados", 10, 20);
+            
+            doc.text("Factura - Heladeria Anonimus Ice Cream", 10, 20);
+            
             let y = 30;
             carrito.forEach((item, i) => {
                 doc.setFontSize(12);

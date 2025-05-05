@@ -4,11 +4,22 @@
         <meta charset="UTF-8">
         <title>Contactanos</title>
         <link rel="stylesheet" href="style.css">
-        <script src="proyecto.js"></script>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="icon" href="imagenes/icono.png" type="image/x-icon">
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
         <script src="bootstrap/js/bootstrap.min.js"></script>
+
+      <style>
+        main label{
+          color: #fff;
+          font-size: 20px;
+        }
+
+        main h2{
+          color: #fff;
+        }
+      </style>
+
     </head>
 <body>
     
@@ -24,6 +35,7 @@
             </ul>
         </nav>
     </header>
+
     <br>
     <br>
     <main class="contacto">
@@ -31,7 +43,7 @@
         <form>
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre completo</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Tu nombre completo !!" required>
+            <input type="text" class="form-control" id="nombre" placeholder="Tu nombre completo" required>
           </div>
           <div class="mb-3">
             <label for="correo" class="form-label">Correo electrónico</label>
@@ -45,9 +57,15 @@
             <label for="mensaje" class="form-label">Mensaje</label>
             <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribenos si tienes algun reclamo, consulta o sugerencia...." required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary w-100">Enviar mensaje</button>
+          <button style="background-color: #c2185b;" type="submit" class="btn btn-primary w-100">Enviar mensaje</button>
         </form>
       </main>
+
+      <br>
+      <br>
+      <br>
+      
+
       <footer class="text-center text-md-start">
         <div class="container">
           <div class="row text-center text-md-start">
@@ -68,7 +86,7 @@
               </div>
             </div>
     
-            <!-- App Store -->
+            <!-- Seccion de app -->
             <div class="col-md-4 mb-4">
               <p>HeladerIA<br>¡Desde tu celular!</p>
               <p><strong>DESCARGA NUESTRA APP</strong></p>
@@ -84,5 +102,6 @@
           </div>
         </div>
       </footer>
+      
 </body>
 </html>
